@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
                 body {
                     margin: 0;
                     padding: 0;
-                    background-image: url("https://upload.wikimedia.org/wikipedia/commons/6/63/VGTU_Saul%C4%97tekis.jpg");
+                    background-image: url("https://vilniustech.lt/images/5492/274/13/17_2/Naujienai%20%20-%202024-12-06T104424.310.png");
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -25,25 +25,37 @@ app.get('/', (req, res) => {
                     font-family: Arial, sans-serif;
                     color: white;
                 }
-
-                .highlight {
-                    background-image: url("https://vilniustech.lt/files/3844/192/9/6_0/Elektronikos_melynas.png"); /* Semi-transparent background */
-                    padding: 20px;
-                    border-radius: 10px;
+                .topRight{
+                    position: absolute;  
+                    top: 120px;                  
+                    right: 0;
+                    width: 900px;
+                    height: auto;                                     
                     font-size: 2rem;
                     font-weight: bold;
-                    text-align: center;                    
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Adds a shadow around the text */
+                    text-align: center;
+                    color:#275196;                    
                 }
+                .imageDiv {
+                  position: absolute;
+                  top: 10px;
+                  right: 10px;
+                  height: 89px; /* Explicit height */
+                  width: 300px; /* Explicit width */
+                  background-image: url('https://vilniustech.lt/files/3844/192/9/6_0/Elektronikos_melynas.png');
+                  background-size: contain; /* Ensures the image scales within the div */
+                  background-repeat: no-repeat;
+                  background-position: center;
+                }               
             </style>
         </head>
-        <body>
-            <div class="highlight">
-                Emilis Dovidauskas grupė KTfm-23
-                Baigiamasis darbas
-                INFRASTRUKTŪRA KAIP KODAS KANALO APSAUGAI
-                PROTECTING INFRASTRUCTURE AS A CODE PIPELINE
-            </div>
+        <body>      
+            <div class="imageDiv"> </div>
+            <div class="topRight">Emilis Dovidauskas grupė KTfm-23
+            <div >Magistro baigiamasis darbas
+            <div >INFRASTRUKTŪRA KAIP KODAS KANALO APSAUGAI
+            <div >PROTECTING INFRASTRUCTURE AS A CODE PIPELINE
+            <div >2025</div></div></div></div></div>
         </body>
         </html>
     `);
