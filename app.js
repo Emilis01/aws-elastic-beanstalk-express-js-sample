@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
                 body {
                     margin: 0;
                     padding: 0;
-                    background-image: url('https://lt.wikipedia.org/wiki/Vaizdas:VGTU_Saul%C4%97tekis.jpg');
+                    background-image: url("https://lt.wikipedia.org/wiki/Vaizdas:VGTU_Saul%C4%97tekis.jpg");
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
