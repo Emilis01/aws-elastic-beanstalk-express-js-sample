@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Hello World</title>
+            <title>Baigiamasis darbas</title>
             <style>
                 body {
                     margin: 0;
@@ -27,19 +27,22 @@ app.get('/', (req, res) => {
                 }
 
                 .highlight {
-                    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+                    background-image: url("https://vilniustech.lt/files/3844/192/9/6_0/Elektronikos_melynas.png"); /* Semi-transparent background */
                     padding: 20px;
                     border-radius: 10px;
                     font-size: 2rem;
                     font-weight: bold;
-                    text-align: center;
+                    text-align: center;                    
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Adds a shadow around the text */
                 }
             </style>
         </head>
         <body>
             <div class="highlight">
-                Hello World
+                Emilis Dovidauskas grupė KTfm-23
+                Baigiamasis darbas
+                INFRASTRUKTŪRA KAIP KODAS KANALO APSAUGAI
+                PROTECTING INFRASTRUCTURE AS A CODE PIPELINE
             </div>
         </body>
         </html>
