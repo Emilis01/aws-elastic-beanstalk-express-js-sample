@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
             <div class="imageDiv"> </div>
             <div class="topRight">Emilis Dovidauskas grupė KTfm-23
             <div >Magistro baigiamasis darbas
-            <div >INFRASTRUKTŪRA KAIP KODAS KANALO APSAUGAI
+            <div >INFRASTRUKTŪRAAAA KAIP KODAS KANALO APSAUGAI
             <div >PROTECTING INFRASTRUCTURE AS A CODE PIPELINE
             <div >2025</div></div></div></div></div>
         </body>
