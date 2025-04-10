@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing dependencies...
+      - npm ci
+      - pip install semgrep
+  build:
+    commands:
+      - echo Running npm audit...
+      - npm audit --audit-level=high || true
+      - echo Running Semgrep...
+      - semgrep scan --config=auto .
+
