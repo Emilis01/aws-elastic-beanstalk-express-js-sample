@@ -11,10 +11,10 @@ phases:
       - echo [INSTALL] Installing Semgrep...
       - pip install --upgrade pip
       - pip install semgrep
+
   build:
     commands:
       - echo [BUILD] Running npm audit...
       - npm audit --audit-level=high || true
       - echo [BUILD] Running Semgrep...
       - semgrep scan --config=auto .
-
