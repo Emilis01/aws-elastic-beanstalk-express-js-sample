@@ -10,7 +10,7 @@ phases:
       java: corretto17
     commands:
       - echo "[INSTALL] Installing dependencies..."
-      - apt-get update && apt-get install -y wget unzip
+      - yum update -y && yum install -y wget unzip
       - wget https://github.com/zaproxy/zaproxy/releases/download/v2.14.0/ZAP_2.14.0_unix.sh
       - chmod +x ZAP_2.14.0_unix.sh
       - ./ZAP_2.14.0_unix.sh -q -dir $HOME/zap
