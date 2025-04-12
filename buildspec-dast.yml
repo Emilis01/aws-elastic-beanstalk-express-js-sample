@@ -7,17 +7,16 @@ env:
 phases:
   install:
     runtime-versions:
-      java: corretto17
+      docker: 20
     commands:
-      - echo "[INSTALL] Installing dependencies..."
-      - yum update -y && yum install -y wget unzip
-      - wget https://github.com/zaproxy/zaproxy/releases/download/v2.14.0/ZAP_2.14.0_unix.tar.gz
-      - mkdir -p $HOME/zap
-      - tar -xzf ZAP_2.14.0_unix.tar.gz -C $HOME/zap --strip-components=1
+      - echo "[INSTALL] Docker ready."
+
   build:
     commands:
       - echo "[ZAP] Running OWASP ZAP baseline scan..."
-      - $HOME/zap/zap.sh -cmd -quickurl "$TARGET_URL" -quickout zap-report.html
+      - docker pull owasp/zap2docker-stable
+      - docker run --rm owasp/zap2docker-stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html
+
   post_build:
     commands:
       - echo "[ZAP] DAST scan complete. Report saved to zap-report.html"
