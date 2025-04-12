@@ -5,10 +5,11 @@ phases:
     commands:
       - echo "[INSTALL] Installing dependencies..."
       - npm ci
-  test:
+  build:
     commands:
       - echo "[TEST] Running placeholder tests..."
       - echo "No tests implemented" && exit 0
+
 artifacts:
   files:
     - '**/*'
