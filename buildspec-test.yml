@@ -7,8 +7,8 @@ phases:
       - npm ci
   build:
     commands:
-      - echo "[TEST] Running placeholder tests..."
-      - echo "No tests implemented" && exit 0
+      - echo "[TEST] Running Jest tests..."
+      - npm test
 
 artifacts:
   files:
