@@ -10,12 +10,13 @@ phases:
       - echo "[INSTALL] Installing Dockerized OWASP ZAP..."
       - yum update -y
       - yum install -y docker
-      - service docker start
+      # - service docker start ← ŠITĄ IŠTRINK!
   build:
     commands:
-      - echo "[ZAP] Running OWASP ZAP baseline scan via Docker..."
-      - docker pull owasp/zap2docker-stable
-      - docker run --rm -v $(pwd):/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html
+      - echo "[ZAP] Running OWASP ZAP baseline scan..."
+      - docker run --rm -v $(pwd):/zap/wrk/:rw \
+          ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
+          -t "$TARGET_URL" -r zap-report.html
   post_build:
     commands:
       - echo "[ZAP] DAST scan complete. Report saved to zap-report.html"
@@ -23,4 +24,3 @@ phases:
 artifacts:
   files:
     - zap-report.html
-
