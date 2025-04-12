@@ -1,210 +1,235 @@
 {
-    "pipeline": {
-        "name": "Pipeline-DevOpsGettingStarted",
-        "roleArn": "arn:aws:iam::730335238739:role/service-role/AWSCodePipelineServiceRole-eu-north-1-Pipeline-DevOpsGettingSta",
-        "artifactStore": {
-            "type": "S3",
-            "location": "codepipeline-eu-north-1-630522180710"
-        },
-        "stages": [
-            {
-                "name": "Source",
-                "actions": [
-                    {
-                        "name": "Source",
-                        "actionTypeId": {
-                            "category": "Source",
-                            "owner": "AWS",
-                            "provider": "CodeStarSourceConnection",
-                            "version": "1"
-                        },
-                        "runOrder": 1,
-                        "configuration": {
-                            "BranchName": "main",
-                            "ConnectionArn": "arn:aws:codeconnections:eu-north-1:730335238739:connection/b9150dfc-c4f0-4fd4-93c0-757ea232c0da",
-                            "DetectChanges": "true",
-                            "FullRepositoryId": "Emilis01/aws-elastic-beanstalk-express-js-sample",
-                            "OutputArtifactFormat": "CODE_ZIP"
-                        },
-                        "outputArtifacts": [
-                            {
-                                "name": "SourceArtifact"
-                            }
-                        ],
-                        "inputArtifacts": [],
-                        "region": "eu-north-1",
-                        "namespace": "SourceVariables"
-                    }
-                ],
-                "onFailure": {
-                    "result": "RETRY",
-                    "retryConfiguration": {
-                        "retryMode": "ALL_ACTIONS"
-                    }
-                }
+  "pipeline": {
+    "name": "Pipeline-DevOpsGettingStarted",
+    "roleArn": "arn:aws:iam::730335238739:role/service-role/AWSCodePipelineServiceRole-eu-north-1-Pipeline-DevOpsGettingSta",
+    "artifactStore": {
+      "type": "S3",
+      "location": "codepipeline-eu-north-1-630522180710"
+    },
+    "stages": [
+      {
+        "name": "Source",
+        "actions": [
+          {
+            "name": "Source",
+            "actionTypeId": {
+              "category": "Source",
+              "owner": "AWS",
+              "provider": "CodeStarSourceConnection",
+              "version": "1"
             },
-{
-  "name": "SAST",
-  "actions": [
-    {
-      "name": "SAST",
-      "actionTypeId": {
-        "category": "Build",
-        "owner": "AWS",
-        "provider": "CodeBuild",
-        "version": "1"
-      },
-      "runOrder": 1,
-      "configuration": {
-        "ProjectName": "SAST-DevOpsCheck"
-      },
-      "outputArtifacts": [],
-      "inputArtifacts": [
-        {
-          "name": "SourceArtifact"
-        }
-      ],
-      "region": "eu-north-1"
-    }
-  ]
-},
-            {
-                "name": "Build",
-                "actions": [
-                    {
-                        "name": "Build",
-                        "actionTypeId": {
-                            "category": "Build",
-                            "owner": "AWS",
-                            "provider": "CodeBuild",
-                            "version": "1"
-                        },
-                        "runOrder": 1,
-                        "configuration": {
-                            "ProjectName": "Build-DevOpsGettingStarted"
-                        },
-                        "outputArtifacts": [
-                            {
-                                "name": "BuildArtifact"
-                            }
-                        ],
-                        "inputArtifacts": [
-                            {
-                                "name": "SourceArtifact"
-                            }
-                        ],
-                        "region": "eu-north-1",
-                        "namespace": "BuildVariables"
-                    }
-                ],
-                "onFailure": {
-                    "result": "RETRY",
-                    "retryConfiguration": {
-                        "retryMode": "ALL_ACTIONS"
-                    }
-                }
+            "runOrder": 1,
+            "configuration": {
+              "BranchName": "main",
+              "ConnectionArn": "arn:aws:codeconnections:eu-north-1:730335238739:connection/b9150dfc-c4f0-4fd4-93c0-757ea232c0da",
+              "DetectChanges": "true",
+              "FullRepositoryId": "Emilis01/aws-elastic-beanstalk-express-js-sample",
+              "OutputArtifactFormat": "CODE_ZIP"
             },
-            {
-                "name": "Test",
-                "actions": [
-                    {
-                        "name": "Test",
-                        "actionTypeId": {
-                            "category": "Test",
-                            "owner": "AWS",
-                            "provider": "CodeBuild",
-                            "version": "1"
-                        },
-                        "runOrder": 1,
-                        "configuration": {
-                            "ProjectName": "Test-DevOpsGettingStarted"
-                        },
-                        "outputArtifacts": [],
-                        "inputArtifacts": [
-                            {
-                                "name": "BuildArtifact"
-                            }
-                        ],
-                        "region": "eu-north-1",
-                        "namespace": "TestVariables"
-                    }
-                ],
-                "onFailure": {
-                    "result": "RETRY",
-                    "retryConfiguration": {
-                        "retryMode": "ALL_ACTIONS"
-                    }
-                }
-            },
-            {
-                "name": "Review",
-                "actions": [
-                    {
-                        "name": "Manual_Review",
-                        "actionTypeId": {
-                            "category": "Approval",
-                            "owner": "AWS",
-                            "provider": "Manual",
-                            "version": "1"
-                        },
-                        "runOrder": 1,
-                        "configuration": {},
-                        "outputArtifacts": [],
-                        "inputArtifacts": [],
-                        "region": "eu-north-1"
-                    }
-                ]
-            },
-            {
-                "name": "Deploy",
-                "actions": [
-                    {
-                        "name": "Deploy",
-                        "actionTypeId": {
-                            "category": "Deploy",
-                            "owner": "AWS",
-                            "provider": "ElasticBeanstalk",
-                            "version": "1"
-                        },
-                        "runOrder": 1,
-                        "configuration": {
-                            "ApplicationName": "DevOpsGettingStarted",
-                            "EnvironmentName": "DevOpsGettingStarted-env"
-                        },
-                        "outputArtifacts": [],
-                        "inputArtifacts": [
-                            {
-                                "name": "BuildArtifact"
-                            }
-                        ],
-                        "region": "eu-north-1",
-                        "namespace": "DeployVariables"
-                    }
-                ],
-                "onFailure": {
-                    "result": "ROLLBACK"
-                }
-            }
+            "outputArtifacts": [
+              {
+                "name": "SourceArtifact"
+              }
+            ],
+            "inputArtifacts": [],
+            "region": "eu-north-1",
+            "namespace": "SourceVariables"
+          }
         ],
-        "version": 2,
-        "executionMode": "QUEUED",
-        "pipelineType": "V2",
-        "triggers": [
-            {
-                "providerType": "CodeStarSourceConnection",
-                "gitConfiguration": {
-                    "sourceActionName": "Source",
-                    "push": [
-                        {
-                            "branches": {
-                                "includes": [
-                                    "main"
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
+        "onFailure": {
+          "result": "RETRY",
+          "retryConfiguration": {
+            "retryMode": "ALL_ACTIONS"
+          }
+        }
+      },
+      {
+        "name": "SAST",
+        "actions": [
+          {
+            "name": "SAST",
+            "actionTypeId": {
+              "category": "Build",
+              "owner": "AWS",
+              "provider": "CodeBuild",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ProjectName": "SAST-DevOpsCheck"
+            },
+            "outputArtifacts": [],
+            "inputArtifacts": [
+              {
+                "name": "SourceArtifact"
+              }
+            ],
+            "region": "eu-north-1"
+          }
         ]
-    }
+      },
+      {
+        "name": "Build",
+        "actions": [
+          {
+            "name": "Build",
+            "actionTypeId": {
+              "category": "Build",
+              "owner": "AWS",
+              "provider": "CodeBuild",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ProjectName": "Build-DevOpsGettingStarted"
+            },
+            "outputArtifacts": [
+              {
+                "name": "BuildArtifact"
+              }
+            ],
+            "inputArtifacts": [
+              {
+                "name": "SourceArtifact"
+              }
+            ],
+            "region": "eu-north-1",
+            "namespace": "BuildVariables"
+          }
+        ],
+        "onFailure": {
+          "result": "RETRY",
+          "retryConfiguration": {
+            "retryMode": "ALL_ACTIONS"
+          }
+        }
+      },
+      {
+        "name": "Test",
+        "actions": [
+          {
+            "name": "Test",
+            "actionTypeId": {
+              "category": "Test",
+              "owner": "AWS",
+              "provider": "CodeBuild",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ProjectName": "Test-DevOpsGettingStarted"
+            },
+            "outputArtifacts": [],
+            "inputArtifacts": [
+              {
+                "name": "BuildArtifact"
+              }
+            ],
+            "region": "eu-north-1",
+            "namespace": "TestVariables"
+          }
+        ],
+        "onFailure": {
+          "result": "RETRY",
+          "retryConfiguration": {
+            "retryMode": "ALL_ACTIONS"
+          }
+        }
+      },
+      {
+        "name": "DAST",
+        "actions": [
+          {
+            "name": "DAST",
+            "actionTypeId": {
+              "category": "Test",
+              "owner": "AWS",
+              "provider": "CodeBuild",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ProjectName": "DAST-DevOpsCheck"
+            },
+            "outputArtifacts": [],
+            "inputArtifacts": [
+              {
+                "name": "SourceArtifact"
+              }
+            ],
+            "region": "eu-north-1",
+            "namespace": "DASTVariables"
+          }
+        ]
+      },
+      {
+        "name": "Review",
+        "actions": [
+          {
+            "name": "Manual_Review",
+            "actionTypeId": {
+              "category": "Approval",
+              "owner": "AWS",
+              "provider": "Manual",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {},
+            "outputArtifacts": [],
+            "inputArtifacts": [],
+            "region": "eu-north-1"
+          }
+        ]
+      },
+      {
+        "name": "Deploy",
+        "actions": [
+          {
+            "name": "Deploy",
+            "actionTypeId": {
+              "category": "Deploy",
+              "owner": "AWS",
+              "provider": "ElasticBeanstalk",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ApplicationName": "DevOpsGettingStarted",
+              "EnvironmentName": "DevOpsGettingStarted-env"
+            },
+            "outputArtifacts": [],
+            "inputArtifacts": [
+              {
+                "name": "BuildArtifact"
+              }
+            ],
+            "region": "eu-north-1",
+            "namespace": "DeployVariables"
+          }
+        ],
+        "onFailure": {
+          "result": "ROLLBACK"
+        }
+      }
+    ],
+    "version": 2,
+    "executionMode": "QUEUED",
+    "pipelineType": "V2",
+    "triggers": [
+      {
+        "providerType": "CodeStarSourceConnection",
+        "gitConfiguration": {
+          "sourceActionName": "Source",
+          "push": [
+            {
+              "branches": {
+                "includes": ["main"]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
 }
+
