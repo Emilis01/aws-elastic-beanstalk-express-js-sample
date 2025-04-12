@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "[INSTALL] Installing dependencies..."
+      - npm ci
+  test:
+    commands:
+      - echo "[TEST] Running placeholder tests..."
+      - echo "No tests implemented" && exit 0
+artifacts:
+  files:
+    - '**/*'
+
