@@ -14,6 +14,7 @@ phases:
     commands:
       - echo "[PRE_BUILD] Creating output directory for ZAP..."
       - mkdir -p zap-output
+      - chmod 777 zap-output
   build:
     commands:
       - echo "[ZAP] Running OWASP ZAP baseline scan..."
