@@ -6,17 +6,16 @@ env:
 
 phases:
   install:
-    runtime-versions:
-      docker: 20
     commands:
-      - echo "[INSTALL] Docker ready."
-
+      - echo "[INSTALL] Installing Dockerized OWASP ZAP..."
+      - yum update -y
+      - yum install -y docker
+      - service docker start
   build:
     commands:
-      - echo "[ZAP] Running OWASP ZAP baseline scan..."
+      - echo "[ZAP] Running OWASP ZAP baseline scan via Docker..."
       - docker pull owasp/zap2docker-stable
-      - docker run --rm owasp/zap2docker-stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html
-
+      - docker run --rm -v $(pwd):/zap/wrk/:rw owasp/zap2docker-stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html
   post_build:
     commands:
       - echo "[ZAP] DAST scan complete. Report saved to zap-report.html"
