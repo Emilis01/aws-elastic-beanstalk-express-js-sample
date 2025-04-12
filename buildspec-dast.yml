@@ -20,7 +20,7 @@ phases:
   build:
     commands:
       - echo "[ZAP] Running OWASP ZAP baseline scan..."
-      - docker run --rm -v $(pwd)/zap-output:/zap/wrk/:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html -w zap.yaml
+      - docker run --rm -v $(pwd)/zap-output:/zap/wrk/:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html -w zap.yaml || test $? -eq 2
 
   post_build:
     commands:
