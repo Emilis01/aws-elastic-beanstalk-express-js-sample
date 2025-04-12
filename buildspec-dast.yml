@@ -11,15 +11,13 @@ phases:
     commands:
       - echo "[INSTALL] Installing dependencies..."
       - yum update -y && yum install -y wget unzip
-      - wget https://github.com/zaproxy/zaproxy/releases/download/v2.14.0/ZAP_2.14.0_unix.sh
-      - chmod +x ZAP_2.14.0_unix.sh
-      - ./ZAP_2.14.0_unix.sh -q -dir $HOME/zap
-
+      - wget https://github.com/zaproxy/zaproxy/releases/download/v2.14.0/ZAP_2.14.0_unix.tar.gz
+      - mkdir -p $HOME/zap
+      - tar -xzf ZAP_2.14.0_unix.tar.gz -C $HOME/zap --strip-components=1
   build:
     commands:
       - echo "[ZAP] Running OWASP ZAP baseline scan..."
       - $HOME/zap/zap.sh -cmd -quickurl "$TARGET_URL" -quickout zap-report.html
-
   post_build:
     commands:
       - echo "[ZAP] DAST scan complete. Report saved to zap-report.html"
