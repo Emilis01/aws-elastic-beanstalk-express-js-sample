@@ -10,15 +10,18 @@ phases:
       - echo "[INSTALL] Installing Dockerized OWASP ZAP..."
       - yum update -y
       - yum install -y docker
+
   pre_build:
     commands:
-      - echo "[PRE_BUILD] Creating output directory for ZAP..."
+      - echo "[PRE_BUILD] Preparing directory..."
       - mkdir -p zap-output
       - chmod 777 zap-output
+
   build:
     commands:
       - echo "[ZAP] Running OWASP ZAP baseline scan..."
-      - docker run --rm -v $(pwd)/zap-output:/zap/wrk/:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html
+      - docker run --rm -v $(pwd)/zap-output:/zap/wrk/:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html -w zap.yaml
+
   post_build:
     commands:
       - echo "[ZAP] DAST scan complete. Report saved to zap-output/zap-report.html"
@@ -26,4 +29,5 @@ phases:
 artifacts:
   files:
     - zap-output/zap-report.html
+    - zap-output/zap.yaml
 
