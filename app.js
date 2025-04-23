@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const port = 8080;
 
+// GRĖSMĖS IMITACIJA: hardcoded slaptažodis
+const dbPassword = 'Pa$$w0rd123!';
+
+
 app.get('/', (req, res) => {
     res.send(`
         <!DOCTYPE html>
