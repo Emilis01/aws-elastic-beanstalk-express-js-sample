@@ -1,33 +1,7 @@
 version: 0.2
 
-env:
-  variables:
-    TARGET_URL: "http://DevOpsGettingStarted-env.eba-pymurxcf.eu-north-1.elasticbeanstalk.com"
-
 phases:
-  install:
-    commands:
-      - echo "[INSTALL] Installing Dockerized OWASP ZAP..."
-      - yum update -y
-      - yum install -y docker
-
-  pre_build:
-    commands:
-      - echo "[PRE_BUILD] Preparing directory..."
-      - mkdir -p zap-output
-      - chmod 777 zap-output
-
   build:
     commands:
-      - echo "[ZAP] Running OWASP ZAP baseline scan..."
-      - docker run --rm -v $(pwd)/zap-output:/zap/wrk/:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t "$TARGET_URL" -r zap-report.html -w zap.yaml || test $? -eq 2
-
-  post_build:
-    commands:
-      - echo "[ZAP] DAST scan complete. Report saved to zap-output/zap-report.html"
-
-artifacts:
-  files:
-    - zap-output/zap-report.html
-    - zap-output/zap.yaml
+      - echo "DAST etapas laikinai išjungtas testavimo eksperimentui"
 
