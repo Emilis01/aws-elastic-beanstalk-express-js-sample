@@ -66,10 +66,6 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.listen(port, () => {
-  console.log(`App running on http://localhost:${port}`);
-});
-
 // --------------------
 // FUNKCIJA TESTAVIMUI
 // --------------------
@@ -78,4 +74,11 @@ function add(a, b) {
 }
 
 module.exports = { add };
+
+// Tik jei ne testavimo režimas – paleidžiam serverį
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`App running on http://localhost:${port}`);
+  });
+}
 
