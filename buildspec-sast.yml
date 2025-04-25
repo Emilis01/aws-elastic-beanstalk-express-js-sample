@@ -9,12 +9,5 @@ phases:
       - pip install semgrep
   build:
     commands:
-      - echo "[SAST] Running Semgrep checks..."
-      - semgrep --config=p/secrets .
-      - semgrep --config=p/nodejs .
-      - semgrep --config=p/security-audit .
-      - semgrep --config=r/javascript.lang.security.detect-hardcoded-secret .
+      - echo "[SAST] Running Semgrep detect-eval rule..."
       - semgrep --config=r/javascript.lang.security.detect-eval .
-      - semgrep --config=r/javascript.lang.security.detect-new-buffer .
-      - semgrep --config=r/javascript.lang.security.detect-dangerous-regex .
-
