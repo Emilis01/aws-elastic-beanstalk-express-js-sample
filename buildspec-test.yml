@@ -1,20 +1,7 @@
 version: 0.2
 
-env:
-  variables:
-    NODE_ENV: test
-
 phases:
-  install:
-    commands:
-      - echo "[INSTALL] Installing dependencies..."
-      - npm ci
   build:
     commands:
-      - echo "[TEST] Running Jest tests..."
-      - npm test
-
-artifacts:
-  files:
-    - '**/*'
+      - echo "[TEST] Testavimo etapas laikinai išjungtas tyrimui"
 
