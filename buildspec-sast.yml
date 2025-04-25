@@ -9,5 +9,8 @@ phases:
       - pip install semgrep
   build:
     commands:
-      - echo "[SAST] Running Semgrep with javascript rule pack..."
-      - semgrep --config=p/javascript .
+      - echo "[SAST] Running Semgrep with Node.js security rules..."
+      - semgrep --config=p/nodejs.security-audit .
+artifacts:
+  files:
+    - '**/*'
