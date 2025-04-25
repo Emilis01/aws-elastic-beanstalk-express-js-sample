@@ -10,4 +10,4 @@ phases:
   build:
     commands:
       - echo "[SAST] Detecting hardcoded secrets with specific Semgrep rule"
-      - semgrep --config="https://semgrep.dev/r/javascript.lang.security.detect-hardcoded-secret" .
+      - semgrep --config="p/javascript.lang.security.detect-hardcoded-secret" .
