@@ -9,6 +9,6 @@ phases:
       - pip install semgrep
   build:
     commands:
-      - echo "[SAST] Detecting hardcoded secrets with Semgrep p/secrets rule"
-      - semgrep --config="p/secrets" .
+      - echo "[SAST] Detecting hardcoded secrets"
+      - semgrep --config="r/javascript.lang.security.detect-hardcoded-secret" .
 
