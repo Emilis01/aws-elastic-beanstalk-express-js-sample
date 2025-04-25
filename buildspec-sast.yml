@@ -5,7 +5,10 @@ phases:
     commands:
       - echo "[INSTALL] Installing dependencies..."
       - npm install
+      - echo "[INSTALL] Installing Semgrep..."
+      - curl -sSL https://github.com/returntocorp/semgrep/releases/download/v0.79.0/semgrep-linux-amd64-v0.79.0.tar.gz | tar xz -C /usr/local/bin
   build:
     commands:
       - echo "[SAST] Running Semgrep with detect-hardcoded-secret"
       - semgrep scan --config=r/javascript.lang.security.detect-hardcoded-secret .
+
