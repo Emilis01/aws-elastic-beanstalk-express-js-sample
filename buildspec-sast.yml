@@ -1,9 +1,1 @@
-phases:
-  install:
-    commands:
-      - echo "[INSTALL] Installing dependencies..."
-      - npm install
-  build:
-    commands:
-      - echo "[SAST] Skipping Semgrep scan"
-      # - semgrep scan --config=r/javascript.lang.security.detect-hardcoded-secret .
+
