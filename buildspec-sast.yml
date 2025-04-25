@@ -9,5 +9,5 @@ phases:
       - pip install semgrep
   build:
     commands:
-      - echo "[SAST] Running Semgrep detect-new-buffer rule..."
-      - semgrep --config=r/javascript.lang.security.detect-new-buffer .
+      - echo "[SAST] Running Semgrep with javascript rule pack..."
+      - semgrep --config=p/javascript .
