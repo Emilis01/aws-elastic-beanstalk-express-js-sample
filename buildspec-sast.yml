@@ -3,7 +3,9 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "No operations performed"
+      - echo "[INSTALL] Installing dependencies..."
+      - npm install
   build:
     commands:
-      - echo "Skipping Semgrep scan"
+      - echo "[SAST] Running Semgrep with detect-hardcoded-secret"
+      - semgrep scan --config=r/javascript.lang.security.detect-hardcoded-secret .
