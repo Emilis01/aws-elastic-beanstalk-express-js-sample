@@ -1,7 +1,12 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - echo "[INSTALL] Installing dependencies..."
+      - npm install
   build:
     commands:
-      - echo "SAST etapas laikinai išjungtas testavimo eksperimentui"
+      - echo "[SAST] Tik npm audit testas – semgrep laikinai išjungtas"
+      - npm audit --audit-level=low
 
