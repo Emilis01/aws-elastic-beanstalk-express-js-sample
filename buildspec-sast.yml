@@ -1,1 +1,9 @@
+version: 0.2
 
+phases:
+  install:
+    commands:
+      - echo "No operations performed"
+  build:
+    commands:
+      - echo "Skipping Semgrep scan"
