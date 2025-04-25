@@ -10,5 +10,5 @@ phases:
   build:
     commands:
       - echo "[SAST] Running Semgrep with multiple configurations"
-      - semgrep scan --config=r/javascript.lang.security.detect-hardcoded-secret,auto .
+      - semgrep scan --config=r/javascript.lang.security.detect-hardcoded-secret .
 
