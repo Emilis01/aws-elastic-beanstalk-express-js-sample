@@ -1,7 +1,19 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Įdiegiamos priklausomybės..."
+      - npm ci
+
   build:
     commands:
-      - echo "[TEST] Testavimo etapas laikinai išjungtas tyrimui"
+      - echo "Vykdomi jest testai..."
+      - npx jest --ci --reporters=default --reporters=jest-junit
+
+artifacts:
+  files:
+    - junit.xml
 
