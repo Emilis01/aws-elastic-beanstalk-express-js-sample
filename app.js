@@ -83,4 +83,3 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Eksportuojame app ir add kad galėtų testai matyti
 module.exports = { app, add };
-
