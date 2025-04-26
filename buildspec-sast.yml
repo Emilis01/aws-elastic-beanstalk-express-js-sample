@@ -6,21 +6,22 @@ phases:
       nodejs: 18
       python: 3.11
     commands:
-      - echo [INSTALL] Installing Node.js dependencies...
-      - npm ci
-      - echo [INSTALL] Installing Semgrep...
+      - echo "Atnaujinamas pip..."
       - pip install --upgrade pip
+      - echo "Įdiegiama semgrep..."
       - pip install semgrep
+      - echo "Atliekamas npm ci (fiksuotos priklausomybės)..."
+      - npm ci
 
   build:
     commands:
-      - echo [BUILD] Running npm audit with high severity check...
+      - echo "Atliekamas npm audit tik aukšto lygio pažeidimams aptikti..."
       - npm audit --audit-level=high
-      - echo [BUILD] Running Semgrep with enhanced ruleset...
-      - semgrep --version
-      - semgrep scan --config=p/security-audit . --sarif > semgrep.sarif
+      - echo "Atliekamas semgrep kodo skenavimas su auto konfigūracija..."
+      - semgrep scan --config=auto .
 
 artifacts:
   files:
-    - '**/*'
     - semgrep.sarif
+  discard-paths: yes
+
