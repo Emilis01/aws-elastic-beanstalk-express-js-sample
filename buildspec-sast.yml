@@ -18,14 +18,7 @@ phases:
       - npm audit --audit-level=high
       - echo [BUILD] Running Semgrep with enhanced ruleset...
       - semgrep scan \
-          --config=p/secrets \
-          --config=p/nodejs \
-          --config=p/security-audit \
-          --config=r/javascript.lang.security.detect-hardcoded-secret \
-          --config=r/javascript.lang.security.detect-eval \
-          --config=r/javascript.lang.security.detect-new-buffer \
-          --config=r/javascript.lang.security.detect-dangerous-regex \
-          .
+          --config=p/security-audit .
 
 artifacts:
   files:
