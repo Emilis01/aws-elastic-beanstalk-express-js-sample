@@ -17,9 +17,10 @@ phases:
       - echo [BUILD] Running npm audit with high severity check...
       - npm audit --audit-level=high
       - echo [BUILD] Running Semgrep with enhanced ruleset...
-      - semgrep scan \
-          --config=p/security-audit .
+      - semgrep --version
+      - semgrep scan --config=p/security-audit . --sarif > semgrep.sarif
 
 artifacts:
   files:
     - '**/*'
+    - semgrep.sarif
