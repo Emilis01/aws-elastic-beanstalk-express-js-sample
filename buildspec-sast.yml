@@ -2,15 +2,31 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 18
+      python: 3.11
     commands:
-      - echo "[INSTALL] Installing dependencies..."
-      - npm install
-      - echo "[INSTALL] Installing Semgrep..."
+      - echo [INSTALL] Installing Node.js dependencies...
+      - npm ci
+      - echo [INSTALL] Installing Semgrep...
+      - pip install --upgrade pip
       - pip install semgrep
+
   build:
     commands:
-      - echo "[SAST] Running Semgrep with Node.js security rules..."
-      - semgrep --config=p/nodejs.security-audit .
+      - echo [BUILD] Running npm audit with high severity check...
+      - npm audit --audit-level=high
+      - echo [BUILD] Running Semgrep with enhanced ruleset...
+      - semgrep scan \
+          --config=p/secrets \
+          --config=p/nodejs \
+          --config=p/security-audit \
+          --config=r/javascript.lang.security.detect-hardcoded-secret \
+          --config=r/javascript.lang.security.detect-eval \
+          --config=r/javascript.lang.security.detect-new-buffer \
+          --config=r/javascript.lang.security.detect-dangerous-regex \
+          .
+
 artifacts:
   files:
     - '**/*'
