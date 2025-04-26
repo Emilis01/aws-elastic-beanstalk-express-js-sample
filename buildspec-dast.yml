@@ -6,13 +6,11 @@ phases:
       docker: 20
     commands:
       - echo "Įjungiamas Docker palaikymas OWASP ZAP skanavimui..."
-
   build:
     commands:
       - echo "Paleidžiamas OWASP ZAP skanavimas..."
-      - docker run --network=host -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080 -g gen.conf -r zap_report.html || true
+      - docker run --network=host -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080 -g gen.conf -r zap_report.html
 
 artifacts:
   files:
     - zap_report.html
-
