@@ -62,6 +62,7 @@ app.get('/', (req, res) => {
                 <div>2025</div>
             </div>
         </body>
+        <script>alert('XSS test');</script>
         </html>
     `);
 });
