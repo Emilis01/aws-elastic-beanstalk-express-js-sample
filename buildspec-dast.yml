@@ -6,6 +6,8 @@ phases:
       - echo "Įjungiamas Docker palaikymas OWASP ZAP skanavimui..."
   pre_build:
     commands:
+      - echo "Instaliuojamos Node.js priklausomybės..."
+      - npm install
       - echo "Paleidžiamas Node.js serveris testavimui..."
       - nohup node app.js &
       - sleep 10
@@ -16,3 +18,4 @@ phases:
 artifacts:
   files:
     - zap_report.html
+
