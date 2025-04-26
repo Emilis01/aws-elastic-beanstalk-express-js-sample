@@ -14,7 +14,7 @@ phases:
   build:
     commands:
       - echo "Paleidžiamas OWASP ZAP skanavimas..."
-      - docker run --network=host -v $(pwd):/zap/wrk ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:8080 -g gen.conf -r zap_report.html -J zap_report.json -d
+      - docker run --network=host -v $(pwd):/tmp ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:8080 -g /tmp/gen.conf -r /tmp/zap_report.html -J /tmp/zap_report.json -d
 artifacts:
   files:
     - zap_report.html
