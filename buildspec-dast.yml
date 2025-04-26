@@ -9,12 +9,13 @@ phases:
       - echo "Instaliuojamos Node.js priklausomybės..."
       - npm install
       - echo "Paleidžiamas Node.js serveris testavimui..."
-      - nohup node app.js &
+      - nohup node app.js > app.log 2>&1 &
       - sleep 10
   build:
     commands:
       - echo "Paleidžiamas OWASP ZAP skanavimas..."
-      - docker run --network=host -v $(pwd):/zap/wrk ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:8080 -g gen.conf -r zap_report.html
+      - docker run --network=host -v $(pwd):/tmp ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:8080 -g /tmp/gen.conf -r /tmp/zap_report.html -d
+      - cp /tmp/zap_report.html .
 artifacts:
   files:
     - zap_report.html
