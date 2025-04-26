@@ -5,11 +5,11 @@ const app = express();
 const port = 8080;
 
 // GRĖSMĖS IMITACIJA: hardcoded slaptažodis
-const dbPassword = 'Pa$$w0rd123!';
+//const dbPassword = 'Pa$$w0rd123!';
 
 // Paprasta add funkcija (klaidinga logika testavimui)
 function add(a, b) {
-  return a - b; // Čia tyčia klaida: turėtų būti a + b
+  return a + b; // Čia tyčia klaida: turėtų būti a + b
 }
 
 // HTTP atsakymas į "/" adresą
