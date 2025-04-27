@@ -9,12 +9,12 @@ app.disable('x-powered-by');
 app.use((req, res, next) => {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https://vilniustech.lt; script-src 'self'; object-src 'none';");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https://vilniustech.lt https://vilniustech.lt; script-src 'self'; object-src 'none';");
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
     next();
 });
 
-// 🧪 GRĖSMĖS IMITACIJA: hardcoded slaptažodis (iškomentuota)
+// 🧪 GRĖSMĖS IMITACIJA: hardcoded slaptaždis (iškomentuota)
 // const dbPassword = 'Pa$$w0rd123!';
 
 // Paprasta funkcija testavimui
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
                 body {
                     margin: 0;
                     padding: 0;
-                    background-image: url("https://vilniustech.lt/images/5492/274/13/17_2/Naujienai%20%20-%202024-12-06T104424.310.png");
+                    background-image: url('https://vilniustech.lt/images/5492/274/13/17_2/Naujienai%20%20-%202024-12-06T104424.310.png');
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -84,14 +84,14 @@ app.get('/', (req, res) => {
     `);
 });
 
-// Paleidžiam serverį
+// Paleidžiame serverį
 let server = null;
 if (process.env.NODE_ENV !== 'test') {
     server = app.listen(port, () => {
         console.log(`App running on http://localhost:${port}`);
     });
 
-    // 🛑 Išjungiam serverį, kai gaunamas nutraukimo signalas
+    // 🔝 Išjungiam serverį, kai gaunamas nutraukimo signalas
     process.on('SIGINT', () => {
         console.log('Received SIGINT, shutting down gracefully');
         server.close(() => {
