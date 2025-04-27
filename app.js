@@ -9,7 +9,7 @@ app.disable('x-powered-by');
 app.use((req, res, next) => {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('Content-Security-Policy', "default-src 'self' https://vilniustech.lt; script-src 'self'; object-src 'none';");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https://vilniustech.lt; script-src 'self'; object-src 'none';");
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
     next();
 });
@@ -109,5 +109,6 @@ if (process.env.NODE_ENV !== 'test') {
     });
 }
 
-// Eksportuojame app ir add funkciją testams
+// Eksportuojame app ir add fu
+nkciją testams
 module.exports = { app, add };
