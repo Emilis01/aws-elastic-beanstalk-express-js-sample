@@ -9,7 +9,7 @@ app.disable('x-powered-by');
 app.use((req, res, next) => {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https://vilniustech.lt https://vilniustech.lt/files/ https://vilniustech.lt/images/; font-src 'self'; style-src 'self'; script-src 'self'; object-src 'none';");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https://vilniustech.lt https://vilniustech.lt/images/ https://vilniustech.lt/files/; script-src 'self'; object-src 'none';");
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
     next();
 });
