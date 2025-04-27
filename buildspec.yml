@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Įdiegiamos priklausomybės..."
+      - npm ci
+  build:
+    commands:
+      - echo "Sukuriamas paruoštas aplikacijos paketas..."
+artifacts:
+  files:
+    - '**/*'
