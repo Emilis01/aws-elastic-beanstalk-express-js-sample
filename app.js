@@ -2,19 +2,19 @@ const express = require('express');
 const app = express();
 const port = 8080;
 
-// 🛡️ Apsauga: Pašalinam "X-Powered-By"
+//Apsauga: Pašalinam "X-Powered-By"
 app.disable('x-powered-by');
 
-// 🛡️ Apsauga: Saugumo antraštės
+//Apsauga: Saugumo antraštės
 app.use((req, res, next) => {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https://vilniustech.lt https://vilniustech.lt/files/ https://vilniustech.lt/images/; script-src 'self'; object-src 'none';");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https://vilniustech.lt https://vilniustech.lt/files/ https://vilniustech.lt/images/; font-src 'self'; style-src 'self'; script-src 'self'; object-src 'none';");
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
     next();
 });
 
-// 🧪 GRĖSMĖS IMITACIJA: hardcoded slaptaždis (iškomentuota)
+//  GRĖSMĖS IMITACIJA: hardcoded slaptaždis (iškomentuota)
 // const dbPassword = 'Pa$$w0rd123!';
 
 // Paprasta funkcija testavimui
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
                 body {
                     margin: 0;
                     padding: 0;
-                    background-image: url('https://vilniustech.lt/images/5492/274/13/17_2/Naujienai%20%20-%202024-12-06T104424.310.png');
+                    background-image: url("https://vilniustech.lt/images/5492/274/13/17_2/Naujienai%20%20-%202024-12-06T104424.310.png");
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -90,24 +90,24 @@ if (process.env.NODE_ENV !== 'test') {
     server = app.listen(port, () => {
         console.log(`App running on http://localhost:${port}`);
     });
-
-    // 🔝 Išjungiam serverį, kai gaunamas nutraukimo signalas
-    process.on('SIGINT', () => {
-        console.log('Received SIGINT, shutting down gracefully');
-        server.close(() => {
-            console.log('Server closed');
-            process.exit(0);
-        });
-    });
-
-    process.on('SIGTERM', () => {
-        console.log('Received SIGTERM, shutting down gracefully');
-        server.close(() => {
-            console.log('Server closed');
-            process.exit(0);
-        });
-    });
 }
+
+// Išjungiam serverį, kai gaunamas nutraukimo signalas
+process.on('SIGINT', () => {
+    console.log('Received SIGINT, shutting down gracefully');
+    server.close(() => {
+        console.log('Server closed');
+        process.exit(0);
+    });
+});
+
+process.on('SIGTERM', () => {
+    console.log('Received SIGTERM, shutting down gracefully');
+    server.close(() => {
+        console.log('Server closed');
+        process.exit(0);
+    });
+});
 
 // Eksportuojame app ir add funkciją testams
 module.exports = { app, add };
