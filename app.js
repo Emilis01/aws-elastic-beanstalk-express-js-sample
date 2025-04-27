@@ -109,6 +109,5 @@ if (process.env.NODE_ENV !== 'test') {
     });
 }
 
-// Eksportuojame app ir add fu
-nkciją testams
+// Eksportuojame app ir add funkciją testams
 module.exports = { app, add };
