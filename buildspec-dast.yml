@@ -12,12 +12,13 @@ phases:
       - echo "Paleidžiamas Node.js serveris testavimui..."
       - nohup node app.js > app.log 2>&1 &
       - sleep 10
+      - echo "Tikrinamas serverio log failas (jei yra):"
+      - cat app.log || echo "app.log nerastas"
 
   build:
     commands:
       - echo "Paleidžiamas OWASP ZAP skanavimas..."
-      - |
-        docker run --user root --network=host \
+      - docker run --user root --network=host \
         -v $(pwd):/zap/wrk:rw \
         ghcr.io/zaproxy/zaproxy:stable \
         zap-baseline.py -t http://localhost:8080 \
