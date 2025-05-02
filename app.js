@@ -1,21 +1,22 @@
 const express = require('express');
+const kintamasis = require('lodash'); // naudojama pažeidžiama biblioteka
 const app = express();
 const port = 8080;
 
-//Apsauga: Pašalinam "X-Powered-By"
+// Apsauga: Pašalinam "X-Powered-By"
 app.disable('x-powered-by');
 
-//Apsauga: Saugumo antraštės
+// Apsauga: Saugumo antraštės
 app.use((req, res, next) => {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https://vilniustech.lt https://vilniustech.lt/images/ https://vilniustech.lt/files/; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none';");
-    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()");
     next();
 });
 
-//  GRĖSMĖS IMITACIJA: hardcoded slaptaždis (iškomentuota)
-// const dbPassword = 'Pa$$w0rd123!';
+// GRĖSMĖS IMITACIJA: naudojama pažeidžiama lodash funkcija
+const example = kintamasis.merge({a: 1}, {b: 2});
 
 // Paprasta funkcija testavimui
 function add(a, b) {
@@ -84,7 +85,6 @@ app.get('/', (req, res) => {
     `);
 });
 
-// Paleidžiame serverį
 let server = null;
 if (process.env.NODE_ENV !== 'test') {
     server = app.listen(port, () => {
@@ -92,7 +92,6 @@ if (process.env.NODE_ENV !== 'test') {
     });
 }
 
-// Išjungiam serverį, kai gaunamas nutraukimo signalas
 process.on('SIGINT', () => {
     console.log('Received SIGINT, shutting down gracefully');
     server.close(() => {
