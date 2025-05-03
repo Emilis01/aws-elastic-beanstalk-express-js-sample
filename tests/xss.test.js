@@ -1,10 +1,10 @@
-const request = require('supertest'); // HTTP testų biblioteka
-const { app } = require('../app');    // Importuojama Express aplikacija
+const request = require('supertest');
+const { app } = require('../app');
 
 test('Neturi būti XSS tipo scenarijaus atsakyme', async () => {
   const res = await request(app).get('/');
-  expect(res.status).toBe(200); // Tikimasi, kad atsakymas sėkmingas
+  expect(res.status).toBe(200);
 
-  // Patikrinama, ar atsakyme nėra kenksmingo <script> elemento
-  expect(res.text).not.toMatch(/<script>alert\(.*\)<\/script>/);
+  // Pritaikyta reguliarioji išraiška, kuri aptinka ir ' arba " ir bet kokius tarpus
+  expect(res.text).not.toMatch(/<script>\s*alert\s*\((.*?)\)\s*;<\/script>/i);
 });
