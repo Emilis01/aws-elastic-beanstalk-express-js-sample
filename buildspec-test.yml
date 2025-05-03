@@ -1,4 +1,7 @@
 version: 0.2
+env:
+  variables:
+    NODE_ENV: test        # Užtikrina, kad serveris nepasileis testuojant
 
 phases:
   install:
@@ -9,4 +12,3 @@ phases:
     commands:
       - echo "Vykdomi jest testai..."
       - npx jest --ci
-
