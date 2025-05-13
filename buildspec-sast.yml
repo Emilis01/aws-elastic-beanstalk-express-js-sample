@@ -19,8 +19,3 @@ phases:
       - semgrep scan --config=p/secrets .
       - echo "Atliekama priklausomybių analizė su npm audit..."
       - npm audit --audit-level=low || true
-
-artifacts:
-  files:
-    - '**/*'
-  discard-paths: yes
