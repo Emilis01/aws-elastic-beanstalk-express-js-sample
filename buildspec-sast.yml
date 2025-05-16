@@ -8,8 +8,8 @@ phases:
     commands:
       - echo "Atnaujinamas pip..."
       - pip install --upgrade pip
-      - echo "Įdiegiama Semgrep..."
-      - pip install semgrep
+     # - echo "Įdiegiama Semgrep..."
+     # - pip install semgrep
       - echo "Atliekamas npm ci (fiksuotos priklausomybės)..."
       - npm ci
 
