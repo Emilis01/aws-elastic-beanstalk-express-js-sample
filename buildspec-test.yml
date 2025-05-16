@@ -10,5 +10,5 @@ phases:
       - npm ci
   build:
     commands:
-      - echo "Vykdomi jest testai..."
-      - npx jest --ci
+      - echo "Vykdomi jest testai, IR matuojama Jest trukmė..."
+      - time npx jest --ci --runInBand
