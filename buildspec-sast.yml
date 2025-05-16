@@ -8,14 +8,14 @@ phases:
     commands:
       - echo "Atnaujinamas pip..."
       - pip install --upgrade pip
-     # - echo "Įdiegiama Semgrep..."
-     # - pip install semgrep
+      - echo "Įdiegiama Semgrep..."
+      - pip install semgrep
       - echo "Atliekamas npm ci (fiksuotos priklausomybės)..."
       - npm ci
 
   build:
     commands:
-     # - echo "Atliekama kodo analizė naudojant Semgrep taisykles p/secrets..."
-     # - semgrep scan --config=p/secrets .
-      - echo "Atliekama priklausomybių analizė su npm audit..."
-      - npm audit --audit-level=low || true
+      - echo "Atliekama kodo analizė naudojant Semgrep taisykles p/secrets..."
+      - semgrep scan --config=p/secrets .
+      #- echo "Atliekama priklausomybių analizė su npm audit..."
+      #- npm audit --audit-level=low || true
