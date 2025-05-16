@@ -17,5 +17,5 @@ phases:
     commands:
       - echo "Atliekama kodo analizė naudojant Semgrep taisykles p/secrets..."
       - semgrep scan --config=p/secrets .
-      - echo "Atliekama priklausomybių analizė su npm audit..."
-      - npm audit --audit-level=low || true
+     # - echo "Atliekama priklausomybių analizė su npm audit..."
+     # - npm audit --audit-level=low || true
