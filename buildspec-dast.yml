@@ -1,20 +1,35 @@
 version: 0.2
 
+env:
+  variables:
+    TARGET_URL: "http://localhost:8080"
+
 phases:
   install:
+    runtime-versions:
+      nodejs: 18
     commands:
       - echo "Įjungiamas Docker palaikymas OWASP ZAP skanavimui..."
+
   pre_build:
     commands:
       - echo "Instaliuojamos Node.js priklausomybės..."
-      - npm install
+      - npm ci
       - echo "Paleidžiamas Node.js serveris testavimui..."
       - nohup node app.js > app.log 2>&1 &
       - sleep 10
+
   build:
     commands:
-      - echo "Paleidžiamas OWASP ZAP skanavimas, IR matuoja OWASP ZAP trukmę..."
-      - time docker run --user root --network=host -v $(pwd):/zap/wrk:rw ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:8080 -g gen.conf -r zap_report.html -J zap_report.json -d || true
-      - echo "Užmušamas Node.js serveris po testavimo..."
+      - echo "Paleidžiamas OWASP ZAP skanavimas, IR matuojama trukmė..."
+      - time docker run --user root --network=host -v $(pwd):/zap/wrk:rw \
+          ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
+          -t $TARGET_URL -g gen.conf -r zap_report.html -J zap_report.json -d || true
+      - echo "Užmušamas Node.js serveris po skanavimo..."
       - pkill -f "node app.js" || true
 
+artifacts:
+  files:
+    - zap_report.html
+    - zap_report.json
+    - app.log

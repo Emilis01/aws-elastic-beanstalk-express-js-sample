@@ -1,14 +1,28 @@
 version: 0.2
+
 env:
   variables:
-    NODE_ENV: test        # Užtikrina, kad serveris nepasileis testuojant
+    NODE_ENV: test  # Užtikrina, kad serveris nepasileistų testuojant
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 18
     commands:
       - echo "Įdiegiamos priklausomybės..."
       - npm ci
+
   build:
     commands:
       - echo "Vykdomi jest testai, IR matuojama Jest trukmė..."
       - time npx jest --ci --runInBand
+
+artifacts:
+  files:
+    - jest-junit.xml
+  discard-paths: yes
+reports:
+  jest_reports:
+    files:
+      - jest-junit.xml
+    file-format: JUNITXML

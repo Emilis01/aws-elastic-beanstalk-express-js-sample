@@ -1,4 +1,3 @@
-{
   "pipeline": {
     "name": "Pipeline-DevOpsGettingStarted",
     "roleArn": "arn:aws:iam::730335238739:role/service-role/AWSCodePipelineServiceRole-eu-north-1-Pipeline-DevOpsGettingSta",
@@ -27,21 +26,13 @@
               "OutputArtifactFormat": "CODE_ZIP"
             },
             "outputArtifacts": [
-              {
-                "name": "SourceArtifact"
-              }
+              { "name": "SourceArtifact" }
             ],
             "inputArtifacts": [],
             "region": "eu-north-1",
             "namespace": "SourceVariables"
           }
-        ],
-        "onFailure": {
-          "result": "RETRY",
-          "retryConfiguration": {
-            "retryMode": "ALL_ACTIONS"
-          }
-        }
+        ]
       },
       {
         "name": "SAST",
@@ -58,11 +49,11 @@
             "configuration": {
               "ProjectName": "SAST-DevOpsCheck"
             },
-            "outputArtifacts": [],
             "inputArtifacts": [
-              {
-                "name": "SourceArtifact"
-              }
+              { "name": "SourceArtifact" }
+            ],
+            "outputArtifacts": [
+              { "name": "SASTArtifact" }
             ],
             "region": "eu-north-1"
           }
@@ -83,26 +74,16 @@
             "configuration": {
               "ProjectName": "Build-DevOpsGettingStarted"
             },
-            "outputArtifacts": [
-              {
-                "name": "BuildArtifact"
-              }
-            ],
             "inputArtifacts": [
-              {
-                "name": "SourceArtifact"
-              }
+              { "name": "SourceArtifact" }
+            ],
+            "outputArtifacts": [
+              { "name": "BuildArtifact" }
             ],
             "region": "eu-north-1",
             "namespace": "BuildVariables"
           }
-        ],
-        "onFailure": {
-          "result": "RETRY",
-          "retryConfiguration": {
-            "retryMode": "ALL_ACTIONS"
-          }
-        }
+        ]
       },
       {
         "name": "Test",
@@ -119,22 +100,14 @@
             "configuration": {
               "ProjectName": "Test-DevOpsGettingStarted"
             },
-            "outputArtifacts": [],
             "inputArtifacts": [
-              {
-                "name": "BuildArtifact"
-              }
+              { "name": "BuildArtifact" }
             ],
+            "outputArtifacts": [],
             "region": "eu-north-1",
             "namespace": "TestVariables"
           }
-        ],
-        "onFailure": {
-          "result": "RETRY",
-          "retryConfiguration": {
-            "retryMode": "ALL_ACTIONS"
-          }
-        }
+        ]
       },
       {
         "name": "DAST",
@@ -151,12 +124,10 @@
             "configuration": {
               "ProjectName": "DAST-DevOpsCheck"
             },
-            "outputArtifacts": [],
             "inputArtifacts": [
-              {
-                "name": "SourceArtifact"
-              }
+              { "name": "BuildArtifact" }
             ],
+            "outputArtifacts": [],
             "region": "eu-north-1",
             "namespace": "DASTVariables"
           }
@@ -197,19 +168,14 @@
               "ApplicationName": "DevOpsGettingStarted",
               "EnvironmentName": "DevOpsGettingStarted-env"
             },
-            "outputArtifacts": [],
             "inputArtifacts": [
-              {
-                "name": "BuildArtifact"
-              }
+              { "name": "BuildArtifact" }
             ],
+            "outputArtifacts": [],
             "region": "eu-north-1",
             "namespace": "DeployVariables"
           }
-        ],
-        "onFailure": {
-          "result": "ROLLBACK"
-        }
+        ]
       }
     ],
     "version": 2,
@@ -232,4 +198,3 @@
     ]
   }
 }
-

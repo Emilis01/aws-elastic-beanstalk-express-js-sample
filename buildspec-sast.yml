@@ -10,12 +10,20 @@ phases:
       - pip install --upgrade pip
       - echo "Įdiegiama Semgrep..."
       - pip install semgrep
-      - echo "Atliekamas npm ci (fiksuotos priklausomybės)..."
+      - echo "Atliekamas npm ci..."
       - npm ci
 
   build:
     commands:
-      - echo "Atliekama kodo analizė naudojant Semgrep taisykles p/secrets, IR matuojama semgrep trukmė..."
-      - time semgrep scan --config=p/secrets .
-      - echo "Atliekama priklausomybių analizė su npm audit, IR matuojama npm audit trukmė..."
-      - time npm audit --audit-level=low || true
+      - echo "Vykdoma Semgrep analizė su p/secrets taisyklėmis..."
+      - semgrep scan --config=p/secrets . --json > semgrep-report.json
+      - echo "Atliekama priklausomybių analizė su npm audit..."
+      - npm audit --json > npm-audit.json || true
+
+artifacts:
+  files:
+    - semgrep-report.json
+    - npm-audit.json
+    - '**/*.js'
+    - package.json
+    - package-lock.json
