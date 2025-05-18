@@ -25,9 +25,7 @@
               "FullRepositoryId": "Emilis01/aws-elastic-beanstalk-express-js-sample",
               "OutputArtifactFormat": "CODE_ZIP"
             },
-            "outputArtifacts": [
-              { "name": "SourceArtifact" }
-            ],
+            "outputArtifacts": [],
             "inputArtifacts": [],
             "region": "eu-north-1",
             "namespace": "SourceVariables"

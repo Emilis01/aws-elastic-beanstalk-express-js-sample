@@ -20,10 +20,3 @@ phases:
       - echo "Atliekama priklausomybių analizė su npm audit..."
       - npm audit --json > npm-audit.json || true
 
-artifacts:
-  files:
-    - semgrep-report.json
-    - npm-audit.json
-    - '**/*.js'
-    - package.json
-    - package-lock.json
