@@ -79,7 +79,7 @@ app.get('/', (req, res) => {
                 <div>PROTECTING INFRASTRUCTURE AS A CODE PIPELINE</div>
                 <div>2025</div>
             </div>
-           // <scriptas>alertas('XSSAS testas');</scriptas> //pakeičiau eilutės sudėtį, nes netgi komentare randa grėsmę
+           <!-- // <scriptas>alertas('XSSAS testas');</scriptas> //pakeičiau eilutės sudėtį, nes netgi komentare randa grėsmę -->
         </body>
         </html>
     `);
