@@ -75,7 +75,7 @@ app.get('/', (req, res) => {
             <div class="topRight">
                 Emilis Dovidauskas grupė KTfm-23
                 <div>Magistro baigiamasis darbas</div>
-                <div>INFRASTRUKTŪRA KAIP KODAS KANALO APSAUGAI</div>
+                <div>INFRASTRUKTŪRA KAIP KODAS KANALO APSAUGA</div>
                 <div>PROTECTING INFRASTRUCTURE AS A CODE PIPELINE</div>
                 <div>2025</div>
             </div>
