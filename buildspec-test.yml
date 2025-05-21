@@ -16,13 +16,3 @@ phases:
     commands:
       - echo "Vykdomi jest testai, IR matuojama Jest trukmė..."
       - time npx jest --ci --runInBand
-
-artifacts:
-  files:
-    - jest-junit.xml
-  discard-paths: yes
-reports:
-  jest_reports:
-    files:
-      - jest-junit.xml
-    file-format: JUNITXML
